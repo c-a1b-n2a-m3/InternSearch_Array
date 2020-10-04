@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+	//code
+	int findPlatforms(int arr[],int dep[],int n)
+	{
+	    sort(arr,arr+n);
+	    sort(dep,dep+n);
+	    int i=1,j=0;
+	    int max_plat=1,needed_plat=1;
+	    while(i<n && j<n)
+	    {
+	        if(dep[j]<arr[i])
+	        {
+	            max_plat--;
+	            j++;
+	        }
+	        else if(arr[i]<=dep[j])
+	        {
+	            max_plat++;
+	            i++;
+	        }
+	        if(max_plat> needed_plat)
+          {
+	            needed_plat=max_plat;
+	        }
+	    }
+	    return needed_plat;
+	}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {int n;
+    cin>>n;
+        int arr[n],dep[n];
+        for(int i=0;i<n;i++)
+        cin>>arr[i];
+        for(int j=0;j<n;j++)
+        cin>>dep[j];
+        cout<<findPlatforms(arr,dep,n)<<endl; 
+    }
+    return 0;
+}
