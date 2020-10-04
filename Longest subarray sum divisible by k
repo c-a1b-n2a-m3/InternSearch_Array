@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+int longSub(int arr[],int n,int k)
+{
+    int max=0;
+    int mod_arr[n];
+    int curr_sum=0;
+    unordered_map<int, int> m;
+    for(int i=0;i<n;i++)
+    {
+        curr_sum+=arr[i];
+        mod_arr[i]=((curr_sum%k)+k)%k; 
+        
+    }
+    for(int i=0;i<n;i++)
+    {
+    if(mod_arr[i]==0)
+    max=i+1;
+    else if(m.find(mod_arr[i])==m.end())
+    m[mod_arr[i]]=i;
+    else
+    if(max<(i-m[mod_arr[i]]))
+    max=i-m[mod_arr[i]];
+    }
+    return max;
+}
+int main()
+ {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n,k;
+	    cin>>n>>k;
+	    int arr[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>arr[i];
+	    }
+	    cout<<longSub(arr,n,k)<<endl;
+	}
+	
+	return 0;
+}
